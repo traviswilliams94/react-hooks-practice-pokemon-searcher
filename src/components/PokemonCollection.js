@@ -1,11 +1,22 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import PokemonCard from "./PokemonCard";
 import { Card } from "semantic-ui-react";
+import PokemonPage from "./PokemonPage";
 
-function PokemonCollection() {
+
+function PokemonCollection({ pokemon, setPokemon, searchState, setSearchState }) {
+
+const filteredPokemon = pokemon.filter(pokemonObj => pokemonObj.name.includes(searchState))
+
+
+
   return (
     <Card.Group itemsPerRow={6}>
-      <h1>Hello From Pokemon Collection</h1>
+      
+        {filteredPokemon.map((pokemonObj) => (
+          <PokemonCard key={pokemonObj.id} name={pokemonObj.name} sprite={pokemonObj.sprites} hp={pokemonObj.hp} />
+        ))}
+    
     </Card.Group>
   );
 }
